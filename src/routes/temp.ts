@@ -1,5 +1,5 @@
 import Elysia from "elysia";
-import prisma from "../config/prisma-client";
+import prisma from "../util/prisma-client";
 
 const temp = new Elysia({ prefix: "/temp" })
     .get("/", () => "this is a temporary endpoint")
@@ -7,6 +7,5 @@ const temp = new Elysia({ prefix: "/temp" })
         const urls = prisma.link.findMany();
         return urls;
     })
-
 
 export default temp;

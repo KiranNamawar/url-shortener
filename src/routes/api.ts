@@ -1,6 +1,6 @@
 import Elysia, { t } from "elysia";
 import { nanoid } from "nanoid";
-import prisma from "../config/prisma-client";
+import prisma from "../util/prisma-client";
 
 const api = new Elysia({ prefix: "/api" })
     .get("/", () => "this endpoint is for internal use only")

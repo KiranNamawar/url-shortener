@@ -19,15 +19,23 @@ model User {
 }
 
 model Link {
-  id          String    @id @default(cuid())
+  id          String      @id @default(cuid())
   originalUrl String
-  shortCode   String    @unique
-  slug        String?   @unique
-  clickCount  Int       @default(0)
+  shortCode   String      @unique
+  slug        String?     @unique
+  clickCount  Int         @default(0)
   userId      String?
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime    @default(now())
   expiresAt   DateTime?
-  user        User?     @relation(fields: [userId], references: [id])
+  user        User?       @relation(fields: [userId], references: [id])
+  linkVisits  LinkVisit[]
 
   @@unique([originalUrl, userId])
+}
+
+model LinkVisit {
+  id        String   @id @default(cuid())
+  linkId    String
+  createdAt DateTime @default(now())
+  link      Link     @relation(fields: [linkId], references: [id])
 }
